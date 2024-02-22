@@ -83,6 +83,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (jumpAvailable && movementY != 0)
         {
+            if (rb.velocity.y < 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            }
+            
             rb.AddForce(Vector2.up * movementY, ForceMode2D.Impulse);
             movementY = 0;
             jumpAvailable = false;

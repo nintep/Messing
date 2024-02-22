@@ -38,6 +38,7 @@ public class KillingObject : MonoBehaviour
             Debug.Log("BOUNCE: " + force.normalized * knockbackForce);
 
             //TODO player loses health
+            collision.gameObject.GetComponent<PlayerHealth>().RemoveHealth(1);
         }
     }
 }
