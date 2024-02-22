@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartHealth: 5
+  HitInvincibilityTime: 0.5
 --- !u!61 &611198632994386305
 BoxCollider2D:
   m_ObjectHideFlags: 0
