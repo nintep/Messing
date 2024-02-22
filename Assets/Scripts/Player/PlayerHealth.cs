@@ -85,6 +85,8 @@ public class PlayerHealth : MonoBehaviour
             transform.position = CurrentCheckpoint.transform.position;
         }
 
+        GetComponent<PlayerMovement>().RemoveVelocity();
+
         ResetHealth();
         invincibilityRemaining = 0;
     }

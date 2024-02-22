@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Ladders : MonoBehaviour
 {
-    private bool playerIsPressingUp = true;
     private bool playerIsColliding = false;
 
     [SerializeField] float movementSpeed = 2f;

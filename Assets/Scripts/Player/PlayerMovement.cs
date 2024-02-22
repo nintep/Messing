@@ -65,6 +65,12 @@ public class PlayerMovement : MonoBehaviour
             movementY = jumpForce;
         }
     }
+
+    public void RemoveVelocity()
+    {
+        rb.velocity = Vector2.zero;
+        affectedByExternalForce = false;
+    }
     
     private void FixedUpdate()
     {
