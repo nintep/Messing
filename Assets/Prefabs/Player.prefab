@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5705592892533264269}
   - component: {fileID: 6673945773889538696}
+  - component: {fileID: 8845363745859061022}
   - component: {fileID: 611198632994386305}
   - component: {fileID: 4024777144858407157}
   - component: {fileID: 7055070482082733274}
@@ -139,6 +140,19 @@ MonoBehaviour:
   jumpForce: 3
   hitInputCooldown: 0.5
   maxHorizontalVelocity: 0.5
+--- !u!114 &8845363745859061022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8081348248929502369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af583e80ef8ee64fa34b84e20e13d0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartHealth: 5
 --- !u!61 &611198632994386305
 BoxCollider2D:
   m_ObjectHideFlags: 0
