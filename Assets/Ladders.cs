@@ -9,16 +9,18 @@ public class Ladders : MonoBehaviour
 
     [SerializeField] float movementSpeed = 2f;
 
+    private PlayerMovement Player;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Player = FindObjectOfType<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerIsPressingUp && playerIsColliding)
+        if (playerIsColliding && Player.IsPressingUp)
         {
             transform.position += new Vector3(0, -movementSpeed * Time.deltaTime, 0);
         }
