@@ -11,12 +11,17 @@ public class PlayerMovement : MonoBehaviour
     private float movementY;
     public float moveSpeed = 5;
     public float jumpForce = 1;
+    public float hitInputCooldown = 0.5f;
 
     private bool jumpAvailable = true;
     public float maxHorizontalVelocity = 16;
 
     private Vector3 externalForce = new Vector3(0, 0, 0);
     private bool affectedByExternalForce = false;
+
+    private bool StopHorizontalMovement = false;
+    private bool inputBlocked = false;
+    private float inputCooldownRemaining = 0;
 
     private void Awake()
     {
@@ -25,13 +30,33 @@ public class PlayerMovement : MonoBehaviour
     
     private void OnMove(InputValue movementValue)
     {
+        if (inputBlocked)
+        {
+            return;
+        }
+
         Vector2 movementVector = movementValue.Get<Vector2>();
         movementX = movementVector.x * moveSpeed;
         affectedByExternalForce = false; //pressing movement keys cancels external force
     }
 
-    private void OnJump(InputValue movementValue)
+    private void OnMoveReleased()
     {
+        if (inputBlocked)
+        {
+            return;
+        }
+
+        StopHorizontalMovement = true;
+    }
+
+    private void OnJump()
+    {
+        if (inputBlocked)
+        {
+            return;
+        }
+
         if (jumpAvailable)
         {
             movementY = jumpForce;
@@ -40,9 +65,16 @@ public class PlayerMovement : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if(movementX == 0 && !affectedByExternalForce)
+        inputCooldownRemaining -= Time.fixedDeltaTime;
+        if (inputCooldownRemaining <= 0)
+        {
+            inputBlocked = false;
+        }
+
+        if (StopHorizontalMovement)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
+            StopHorizontalMovement = false;
         }
         else if (Mathf.Abs(rb.velocity.x) < maxHorizontalVelocity)
         {
@@ -75,6 +107,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetExternalForce(Vector3 force)
     {
+        inputBlocked = true;
+        inputCooldownRemaining = hitInputCooldown;
+        movementX = 0;
         externalForce = force;
         affectedByExternalForce = true;
     }
