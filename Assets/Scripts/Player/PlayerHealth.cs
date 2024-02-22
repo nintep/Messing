@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public int StartHealth;
     public int CurrentHealth {get; private set;}
     public float HitInvincibilityTime;
+    public int DeathYCoordinate = -100;
 
     private Vector3 startPosition;
     public Checkpoint CurrentCheckpoint {get; private set;}
@@ -34,6 +35,12 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        if (transform.position.y < DeathYCoordinate)
+        {
+            RemoveHealth(CurrentHealth);
+            return;
+        }
+
         if (invincibilityRemaining >= 0)
         {
             invincibilityRemaining -= Time.deltaTime;
@@ -78,7 +85,10 @@ public class PlayerHealth : MonoBehaviour
             transform.position = CurrentCheckpoint.transform.position;
         }
 
+        GetComponent<PlayerMovement>().RemoveVelocity();
+
         ResetHealth();
+        invincibilityRemaining = 0;
     }
 
     private void ResetHealth()

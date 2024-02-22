@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private bool inputBlocked = false;
     private float inputCooldownRemaining = 0;
 
+    public bool IsPressingUp {get; private set;}
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 movementVector = movementValue.Get<Vector2>();
         movementX = movementVector.x * moveSpeed;
+        IsPressingUp = movementVector.y > 0;
         affectedByExternalForce = false; //pressing movement keys cancels external force
     }
 
@@ -61,6 +64,12 @@ public class PlayerMovement : MonoBehaviour
         {
             movementY = jumpForce;
         }
+    }
+
+    public void RemoveVelocity()
+    {
+        rb.velocity = Vector2.zero;
+        affectedByExternalForce = false;
     }
     
     private void FixedUpdate()

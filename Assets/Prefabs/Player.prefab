@@ -95,8 +95,6 @@ GameObject:
   - component: {fileID: 5705592892533264269}
   - component: {fileID: 6673945773889538696}
   - component: {fileID: 8845363745859061022}
-  - component: {fileID: 611198632994386305}
-  - component: {fileID: 4024777144858407157}
   - component: {fileID: 7055070482082733274}
   - component: {fileID: 4418962598740456085}
   - component: {fileID: 93689885227061963}
@@ -136,10 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48bf24d5568c5c846912b7131d408dff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
-  jumpForce: 3
+  moveSpeed: 10
+  jumpForce: 15
   hitInputCooldown: 0.5
-  maxHorizontalVelocity: 0.5
+  maxHorizontalVelocity: 10
 --- !u!114 &8845363745859061022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,67 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartHealth: 5
   HitInvincibilityTime: 0.5
---- !u!61 &611198632994386305
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8081348248929502369}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 52f78fff1ee453149ac3a1817d5f625f, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &4024777144858407157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8081348248929502369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48bf24d5568c5c846912b7131d408dff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 30
-  jumpForce: 15
-  hitInputCooldown: 0.5
-  maxHorizontalVelocity: 16
+  DeathYCoordinate: -100
 --- !u!114 &7055070482082733274
 MonoBehaviour:
   m_ObjectHideFlags: 0
