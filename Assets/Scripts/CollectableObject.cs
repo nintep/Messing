@@ -15,6 +15,11 @@ public class CollectableObject : MonoBehaviour
                 IncreasePlayerHealth(collider.gameObject);
             }
 
+            if (Type == CollectibleType.score)
+            {
+                IncreasePlayerScore();
+            }
+
             Destroy(gameObject);
         }
     }
@@ -23,6 +28,13 @@ public class CollectableObject : MonoBehaviour
     {
         Player.GetComponent<PlayerHealth>().AddHealth(1);
     }
+
+    public void IncreasePlayerScore()
+    {
+        FindObjectOfType<ScoreCounter>().AddScore();
+    }
+
+
 }
 
 public enum CollectibleType

@@ -25,7 +25,6 @@ public class DebugMessage : MonoBehaviour
 
         if (lifeLeft <= 0)
         {
-            Debug.Log(transform.GetSiblingIndex());
             if(!isLatestMessage)
             {
                 Destroy(gameObject);
