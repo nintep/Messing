@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private bool jumpAvailable = true;
     public float maxHorizontalVelocity = 16;
 
+    private Vector3 externalForce = new Vector3(0, 0, 0);
+    private bool affectedByExternalForce = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
         movementX = movementVector.x * moveSpeed;
+        affectedByExternalForce = false; //pressing movement keys cancels external force
     }
 
     private void OnJump(InputValue movementValue)
@@ -36,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if(movementX == 0)
+        if(movementX == 0 && !affectedByExternalForce)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
@@ -51,6 +55,13 @@ public class PlayerMovement : MonoBehaviour
             movementY = 0;
             jumpAvailable = false;
         }
+
+        if (affectedByExternalForce)
+        {
+            //After the force is applied, reset the external force but don't reset the affectedByExternalForce flag until player presses movement keys
+            rb.AddForce(externalForce, ForceMode2D.Impulse);
+            externalForce = new Vector3(0, 0, 0);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -60,6 +71,11 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Jump refreshed");
             jumpAvailable = true;
         }
-        
+    }
+
+    public void SetExternalForce(Vector3 force)
+    {
+        externalForce = force;
+        affectedByExternalForce = true;
     }
 }
