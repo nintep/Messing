@@ -14,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
     private Vector3 startPosition;
     public Checkpoint CurrentCheckpoint {get; private set;}
 
+    private AudioSource audioSource;
+
     public event Action PlayerDied;
 
     private float invincibilityRemaining = 0;
@@ -26,6 +28,8 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth = StartHealth;
 
         healthBar = FindObjectOfType<HealthBar>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -66,6 +70,8 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth = Mathf.Max(0, CurrentHealth);
 
         healthBar?.SetHealth(CurrentHealth);
+
+        audioSource?.Play();
 
         if (CurrentHealth == 0)
         {
