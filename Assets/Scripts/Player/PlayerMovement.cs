@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5;
     public float jumpForce = 1;
     public float hitInputCooldown = 0.5f;
+    public float hitMovementToZeroCooldown = 1f;
 
     private bool jumpAvailable = true;
     public float maxHorizontalVelocity = 16;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private bool StopHorizontalMovement = false;
     private bool inputBlocked = false;
     private float inputCooldownRemaining = 0;
+    private float movementToZeroCooldownRemaining = 0;
 
     public bool IsPressingUp {get; private set;}
 
@@ -38,6 +40,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector2 movementVector = movementValue.Get<Vector2>();
+
+        //cancel setting movement to zero after bounce if player adds movement input
+        if (movementVector.x != 0 || movementVector.y != 0)
+        {
+            movementToZeroCooldownRemaining = 0;
+        }
+
         movementX = movementVector.x * moveSpeed;
         IsPressingUp = movementVector.y > 0;
         affectedByExternalForce = false; //pressing movement keys cancels external force
@@ -78,6 +87,16 @@ public class PlayerMovement : MonoBehaviour
         if (inputCooldownRemaining <= 0)
         {
             inputBlocked = false;
+        }
+
+        if (movementToZeroCooldownRemaining > 0)
+        {
+            movementToZeroCooldownRemaining -= Time.fixedDeltaTime;
+            if (movementToZeroCooldownRemaining <= 0)
+            {
+                //Debug.Log("horizontal movement stopped");
+                StopHorizontalMovement = true;
+            }
         }
 
         if (StopHorizontalMovement)
@@ -123,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
     {
         inputBlocked = true;
         inputCooldownRemaining = hitInputCooldown;
+        movementToZeroCooldownRemaining = hitMovementToZeroCooldown;
         movementX = 0;
         externalForce = force;
         affectedByExternalForce = true;
