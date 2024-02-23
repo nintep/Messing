@@ -135,8 +135,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  jumpForce: 15
-  hitInputCooldown: 0.5
+  jumpForce: 12.5
+  hitInputCooldown: 0.1
+  hitMovementToZeroCooldown: 0.5
+  jumpAvailable: 1
   maxHorizontalVelocity: 10
 --- !u!114 &8845363745859061022
 MonoBehaviour:
@@ -150,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af583e80ef8ee64fa34b84e20e13d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartHealth: 5
+  StartHealth: 3
   HitInvincibilityTime: 0.5
   DeathYCoordinate: -100
 --- !u!114 &7055070482082733274
@@ -198,7 +200,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 5
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -242,7 +244,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.03054905, y: -0.08370662}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -253,7 +255,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.45011604, y: 0.8253081}
   m_EdgeRadius: 0
 --- !u!95 &3961179809713955037
 Animator:

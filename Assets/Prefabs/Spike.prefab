@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceCenter: {fileID: 735168661858660688}
-  knockbackForce: 20
+  knockbackForce: 10
 --- !u!50 &1353399187912755438
 Rigidbody2D:
   serializedVersion: 4

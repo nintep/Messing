@@ -842,13 +842,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2758316299379327514, guid: 0c1813082050afa4cb54126f3069ed05, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2910181206154706620, guid: 0c1813082050afa4cb54126f3069ed05, type: 3}
       propertyPath: m_Name
       value: Cloud With Path + Spider
       objectReference: {fileID: 0}
     - target: {fileID: 3396577780148198176, guid: 0c1813082050afa4cb54126f3069ed05, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.21
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

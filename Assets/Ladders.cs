@@ -7,13 +7,16 @@ public class Ladders : MonoBehaviour
     private bool playerIsColliding = false;
 
     [SerializeField] float movementSpeed = 2f;
+    [SerializeField] float errorFrequencyPerSecond = 2f;
 
     private PlayerMovement Player;
+    private float timer;
 
     // Start is called before the first frame update
     void Start()
     {
         Player = FindObjectOfType<PlayerMovement>();
+        timer = 1f;
     }
 
     // Update is called once per frame
@@ -22,6 +25,13 @@ public class Ladders : MonoBehaviour
         if (playerIsColliding && Player.IsPressingUp)
         {
             transform.position += new Vector3(0, -movementSpeed * Time.deltaTime, 0);
+            
+            timer += Time.deltaTime;
+            if (timer > 1/errorFrequencyPerSecond)
+            {
+                FindObjectOfType<DebugConsole>().AddMessage("NullReferenceException: Object reference not set to an instance of an object", true);
+                timer = 0;
+            }
         }
     }
 
