@@ -1879,6 +1879,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud With Path Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2910181206154706620, guid: 64d0f33e029abc64d925c5339574b65d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
