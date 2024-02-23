@@ -6,24 +6,24 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-
-    private float movementX;
-    private float movementY;
     public float moveSpeed = 5;
     public float jumpForce = 1;
     public float hitInputCooldown = 0.5f;
-    public float hitMovementToZeroCooldown = 1f;
+    public float maxHorizontalVelocity = 16;
 
     public bool jumpAvailable = true;
-    public float maxHorizontalVelocity = 16;
+
+    private bool inputBlocked = false;
+    private float inputBlockedCooldown;
+
+    private float inputMovementX;
+    private float inputMovementY;
+    private bool inputJump;
 
     private Vector3 externalForce = new Vector3(0, 0, 0);
     private bool affectedByExternalForce = false;
 
-    private bool StopHorizontalMovement = false;
-    private bool inputBlocked = false;
-    private float inputCooldownRemaining = 0;
-    private float movementToZeroCooldownRemaining = 0;
+    private bool removeVelocity = false;
 
     public bool IsPressingUp {get; private set;}
 
@@ -31,120 +31,109 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    
+
     private void OnMove(InputValue movementValue)
     {
         if (inputBlocked)
         {
-            return;
+            inputMovementX = 0;
+            inputMovementY = 0;
         }
-
-        Vector2 movementVector = movementValue.Get<Vector2>();
-
-        //cancel setting movement to zero after bounce if player adds movement input
-        if (movementVector.x != 0 || movementVector.y != 0)
+        else
         {
-            movementToZeroCooldownRemaining = 0;
+            Vector2 movementVector = movementValue.Get<Vector2>();
+
+            inputMovementX = movementVector.x;
+            inputMovementY = movementVector.y;
+
+            IsPressingUp = movementVector.y > 0;
         }
-
-        movementX = movementVector.x * moveSpeed;
-        IsPressingUp = movementVector.y > 0;
-        affectedByExternalForce = false; //pressing movement keys cancels external force
-    }
-
-    private void OnMoveReleased()
-    {
-        if (inputBlocked)
-        {
-            return;
-        }
-
-        StopHorizontalMovement = true;
     }
 
     private void OnJump()
     {
-        if (inputBlocked)
+        if (inputBlocked || !jumpAvailable)
         {
-            return;
+            inputJump = false;
         }
-
-        if (jumpAvailable)
+        else
         {
-            movementY = jumpForce;
-        }
-    }
-
-    public void RemoveVelocity()
-    {
-        rb.velocity = Vector2.zero;
-        affectedByExternalForce = false;
-    }
-    
-    private void FixedUpdate()
-    {
-        inputCooldownRemaining -= Time.fixedDeltaTime;
-        if (inputCooldownRemaining <= 0)
-        {
-            inputBlocked = false;
-        }
-
-        if (movementToZeroCooldownRemaining > 0)
-        {
-            movementToZeroCooldownRemaining -= Time.fixedDeltaTime;
-            if (movementToZeroCooldownRemaining <= 0)
-            {
-                //Debug.Log("horizontal movement stopped");
-                StopHorizontalMovement = true;
-            }
-        }
-
-        if (StopHorizontalMovement)
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            StopHorizontalMovement = false;
-        }
-        else if (Mathf.Abs(rb.velocity.x) < maxHorizontalVelocity)
-        {
-            rb.AddForce(new Vector2(movementX, 0));
-        }
-
-        if (jumpAvailable && movementY != 0)
-        {
-            if (rb.velocity.y < 0)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-            }
-            
-            rb.AddForce(Vector2.up * movementY, ForceMode2D.Impulse);
-            movementY = 0;
-            jumpAvailable = false;
-        }
-
-        if (affectedByExternalForce)
-        {
-            //After the force is applied, reset the external force but don't reset the affectedByExternalForce flag until player presses movement keys
-            rb.AddForce(externalForce, ForceMode2D.Impulse);
-            externalForce = new Vector3(0, 0, 0);
-        }
+            inputJump = true;
+        }        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(!jumpAvailable)
         {
-            Debug.Log("Jump refreshed");
+            //Debug.Log("Jump refreshed");
             jumpAvailable = true;
         }
     }
 
     public void SetExternalForce(Vector3 force)
     {
+        Debug.Log("Add external force");
         inputBlocked = true;
-        inputCooldownRemaining = hitInputCooldown;
-        movementToZeroCooldownRemaining = hitMovementToZeroCooldown;
-        movementX = 0;
+        inputBlockedCooldown = hitInputCooldown;
+
         externalForce = force;
         affectedByExternalForce = true;
+    }
+
+    public void RemoveVelocity()
+    {
+        removeVelocity = true;
+    }
+
+    private void Update()
+    {
+        if (inputBlockedCooldown > 0)
+        {
+            inputBlockedCooldown -= Time.deltaTime;
+            if (inputBlockedCooldown <= 0)
+            {
+                inputBlocked = false;
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        //Add movement from input
+        if (!inputBlocked)
+        {
+            rb.velocity = new Vector2(inputMovementX * moveSpeed, rb.velocity.y);
+            //nputMovementX = 0;
+            //inputMovementY = 0;
+        }
+
+        if (jumpAvailable && inputJump)
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            inputJump = false;
+            jumpAvailable = false;
+        }
+
+        //Add movement from external forces
+        if (affectedByExternalForce)
+        {
+            rb.AddForce(Vector2.up * externalForce.y, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x + externalForce.x, rb.velocity.y);
+
+            externalForce = Vector2.zero;
+        }
+
+        //check if velocity is too high
+        if (Mathf.Abs(rb.velocity.x) > maxHorizontalVelocity)
+        {
+            rb.velocity = new Vector2(maxHorizontalVelocity, rb.velocity.y);
+        }
+
+        if (removeVelocity)
+        {
+            rb.velocity = Vector2.zero;
+            removeVelocity = false;
+        }
     }
 }
