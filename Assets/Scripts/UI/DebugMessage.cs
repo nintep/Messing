@@ -10,6 +10,7 @@ public class DebugMessage : MonoBehaviour
     private float lifeLeft;
 
     public bool isLatestMessage = false;
+    public bool timerRunning = false;
 
     private void Awake()
     {
@@ -18,7 +19,7 @@ public class DebugMessage : MonoBehaviour
 
     private void Update()
     {
-        if (lifeLeft > 0)
+        if (lifeLeft > 0 && timerRunning)
         {
             lifeLeft -= Time.deltaTime;
         }

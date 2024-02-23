@@ -53,8 +53,11 @@ public class DebugConsole : MonoBehaviour
         newMessage.transform.SetParent(MessageContainer.transform, false);
 
         if (LastMessage != null) LastMessage.isLatestMessage = false;
+        if (LastMessage != null) LastMessage.timerRunning = true;
+
         LastMessage = newMessage.GetComponent<DebugMessage>();
         LastMessage.isLatestMessage = true;
+        LastMessage.timerRunning = false;
 
         string timeStamp = System.DateTime.Now.ToString("HH:mm");
         string messageWithTimeStamp = String.Format("[{0}] {1}", timeStamp, message);
