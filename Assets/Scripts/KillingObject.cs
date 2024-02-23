@@ -25,7 +25,6 @@ public class KillingObject : MonoBehaviour
             collision.gameObject.GetComponent<PlayerMovement>().SetExternalForce(force.normalized * knockbackForce);
 
             FindObjectOfType<DebugConsole>().AddMessage("LadyBug hit object: " + gameObject.name, false);
-            FindObjectOfType<DebugConsole>().AddMessage("Knokback: " + force, false);
 
             //TODO player loses health
             collision.gameObject.GetComponent<PlayerHealth>().RemoveHealth(1);
