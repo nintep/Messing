@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private bool removeVelocity = false;
 
     public bool IsPressingUp {get; private set;}
+    public bool IsJumping;
 
     private void Awake()
     {
@@ -69,6 +70,11 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("Jump refreshed");
             jumpAvailable = true;
         }
+
+        if (IsJumping)
+        {
+            IsJumping = false;
+        }
     }
 
     public void SetExternalForce(Vector3 force)
@@ -111,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumpAvailable && inputJump)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            IsJumping = true;
             inputJump = false;
             jumpAvailable = false;
         }
