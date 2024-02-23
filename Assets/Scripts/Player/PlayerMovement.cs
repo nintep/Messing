@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float hitInputCooldown = 0.5f;
     public float hitMovementToZeroCooldown = 1f;
 
-    private bool jumpAvailable = true;
+    public bool jumpAvailable = true;
     public float maxHorizontalVelocity = 16;
 
     private Vector3 externalForce = new Vector3(0, 0, 0);
