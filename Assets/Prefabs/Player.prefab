@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 4418962598740456085}
   - component: {fileID: 93689885227061963}
   - component: {fileID: 3961179809713955037}
+  - component: {fileID: 4215455452981089659}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -134,12 +135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48bf24d5568c5c846912b7131d408dff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 5
   jumpForce: 12.5
   hitInputCooldown: 0.1
-  hitMovementToZeroCooldown: 0.5
+  maxHorizontalVelocity: 5
   jumpAvailable: 1
-  maxHorizontalVelocity: 10
 --- !u!114 &8845363745859061022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8081348248929502369}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 52f78fff1ee453149ac3a1817d5f625f, type: 2}
   m_IncludeLayers:
@@ -278,3 +278,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &4215455452981089659
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8081348248929502369}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.04, y: -0.08}
+  m_Size: {x: 0.42, y: 0.86}
+  m_Direction: 0
