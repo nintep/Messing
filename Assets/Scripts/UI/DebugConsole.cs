@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DebugConsole : MonoBehaviour
 {
@@ -16,6 +17,17 @@ public class DebugConsole : MonoBehaviour
 
     private void Awake()
     {
+        #if UNITY_EDITOR
+        #else
+            TestInputsActive = false;
+        #endif
+
+    }
+
+    private void Start()
+    {
+        AddMessage("InvalidOperationException: Could not complete function HideDebugger(true)", true);
+        AddMessage("game started", false);
     }
 
     private void Update()
@@ -44,7 +56,10 @@ public class DebugConsole : MonoBehaviour
         LastMessage = newMessage.GetComponent<DebugMessage>();
         LastMessage.isLatestMessage = true;
 
-        LastMessage.SetText(message);
+        string timeStamp = System.DateTime.Now.ToString("HH:mm");
+        string messageWithTimeStamp = String.Format("[{0}] {1}", timeStamp, message);
+
+        LastMessage.SetText(messageWithTimeStamp);
     }
 
 }
