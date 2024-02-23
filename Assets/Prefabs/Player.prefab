@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5705592892533264269}
   - component: {fileID: 6673945773889538696}
   - component: {fileID: 8845363745859061022}
+  - component: {fileID: 5005189700912840044}
   - component: {fileID: 7055070482082733274}
   - component: {fileID: 4418962598740456085}
   - component: {fileID: 93689885227061963}
@@ -155,6 +156,22 @@ MonoBehaviour:
   StartHealth: 3
   HitInvincibilityTime: 0.5
   DeathYCoordinate: -100
+--- !u!114 &5005189700912840044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8081348248929502369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c52bb1d816c5d41b136f22be48d1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAnimation: Idle
+  runAnimation: Run
+  jumpAnimation: Run
+  climbAnimation: Run
 --- !u!114 &7055070482082733274
 MonoBehaviour:
   m_ObjectHideFlags: 0
