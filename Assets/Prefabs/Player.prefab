@@ -136,8 +136,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpForce: 15
-  hitInputCooldown: 0.5
+  hitInputCooldown: 0.1
   maxHorizontalVelocity: 10
+  jumpAvailable: 1
 --- !u!114 &8845363745859061022
 MonoBehaviour:
   m_ObjectHideFlags: 0
