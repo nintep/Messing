@@ -102,6 +102,8 @@ public class PlayerHealth : MonoBehaviour
         CurrentCheckpoint?.DeactivateCheckpoint();
         CurrentCheckpoint = checkpoint;
         checkpoint.ActivateCheckpoint();
+
+        ResetHealth();
     }
 
 
