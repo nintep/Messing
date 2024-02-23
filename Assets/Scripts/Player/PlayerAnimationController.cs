@@ -29,7 +29,7 @@ public class PlayerAnimationController : MonoBehaviour
         {
             PlayAnimation(PlayerAnimationState.climb);
         }
-        else if (Mathf.Abs(velocity.y) > 0)
+        else if (movement.IsInAir)
         {
             PlayAnimation(PlayerAnimationState.jump);
         }
