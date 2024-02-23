@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Unity.Mathematics;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,8 +12,6 @@ public class PlayerHealth : MonoBehaviour
 
     private Vector3 startPosition;
     public Checkpoint CurrentCheckpoint {get; private set;}
-
-    private AudioSource audioSource;
 
     public event Action PlayerDied;
 
@@ -28,13 +25,11 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth = StartHealth;
 
         healthBar = FindObjectOfType<HealthBar>();
-
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        healthBar?.SetHealth(CurrentHealth);
+        healthBar?.SetHealth(CurrentHealth, false);
     }
 
     private void Update()
@@ -54,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
     public void AddHealth(int amount)
     {
         CurrentHealth += amount;
-        healthBar?.SetHealth(CurrentHealth);
+        healthBar?.SetHealth(CurrentHealth, true);
     }
 
     public void RemoveHealth(int amount)
@@ -69,9 +64,7 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth -= amount;
         CurrentHealth = Mathf.Max(0, CurrentHealth);
 
-        healthBar?.SetHealth(CurrentHealth);
-
-        audioSource?.Play();
+        healthBar?.SetHealth(CurrentHealth, true);
 
         if (CurrentHealth == 0)
         {
@@ -100,7 +93,7 @@ public class PlayerHealth : MonoBehaviour
     private void ResetHealth()
     {
         CurrentHealth = StartHealth;
-        healthBar?.SetHealth(CurrentHealth);
+        healthBar?.SetHealth(CurrentHealth, false);
     }
 
     public void SetActiveCheckpoint(Checkpoint checkpoint)
