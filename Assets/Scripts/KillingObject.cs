@@ -7,17 +7,6 @@ public class KillingObject : MonoBehaviour
     [SerializeField] GameObject bounceCenter;
     [SerializeField] float knockbackForce = 100f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -35,7 +24,8 @@ public class KillingObject : MonoBehaviour
 
             collision.gameObject.GetComponent<PlayerMovement>().SetExternalForce(force.normalized * knockbackForce);
 
-            Debug.Log("BOUNCE: " + force.normalized * knockbackForce);
+            FindObjectOfType<DebugConsole>().AddMessage("LadyBug hit object: " + collision.gameObject.name, false);
+            //FindObjectOfType<DebugConsole>().AddMessage("Knokback: " + collision.gameObject.name);
 
             //TODO player loses health
             collision.gameObject.GetComponent<PlayerHealth>().RemoveHealth(1);
