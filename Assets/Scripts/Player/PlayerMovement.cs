@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private bool removeVelocity = false;
 
     public bool IsPressingUp {get; private set;}
-    public bool IsJumping;
+    public bool IsInAir; //used for animation
 
     private void Awake()
     {
@@ -71,9 +71,9 @@ public class PlayerMovement : MonoBehaviour
             jumpAvailable = true;
         }
 
-        if (IsJumping)
+        if (IsInAir)
         {
-            IsJumping = false;
+            IsInAir = false;
         }
     }
 
@@ -85,6 +85,11 @@ public class PlayerMovement : MonoBehaviour
 
         externalForce = force;
         affectedByExternalForce = true;
+
+        if (force.y > 0.5)
+        {
+            IsInAir = true;
+        }
     }
 
     public void RemoveVelocity()
@@ -117,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumpAvailable && inputJump)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            IsJumping = true;
+            IsInAir = true;
             inputJump = false;
             jumpAvailable = false;
         }
