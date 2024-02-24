@@ -20,6 +20,8 @@ public class ScoreCounter : MonoBehaviour
         CurrentScore++;
         ScoreText.text = "Score: " + CurrentScore;
 
+        GetComponent<AudioSource>()?.Play();
+
         FindObjectOfType<DebugConsole>().AddMessage("Score thing collected", false);
     }
 }

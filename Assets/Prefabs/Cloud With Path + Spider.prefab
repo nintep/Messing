@@ -358,6 +358,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 856037935736557598}
     m_Modifications:
+    - target: {fileID: 11901047501474087, guid: 21c43140cc612d642b0151489cc155f3, type: 3}
+      propertyPath: UseVerticalAnimation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1015508753366355663, guid: 21c43140cc612d642b0151489cc155f3, type: 3}
       propertyPath: ShowPath
       value: 1

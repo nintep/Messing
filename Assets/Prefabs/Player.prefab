@@ -141,7 +141,7 @@ MonoBehaviour:
   hitInputCooldown: 0.1
   maxHorizontalVelocity: 5
   jumpAvailable: 1
-  IsJumping: 0
+  IsInAir: 0
 --- !u!114 &8845363745859061022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   idleAnimation: Idle
   runAnimation: Run
   jumpAnimation: Jump
-  climbAnimation: Run
+  climbAnimation: Climb
 --- !u!114 &7055070482082733274
 MonoBehaviour:
   m_ObjectHideFlags: 0
