@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     public Checkpoint CurrentCheckpoint {get; private set;}
 
     public event Action PlayerDied;
+    public event Action CheckpointActivated;
 
     private float invincibilityRemaining = 0;
 
@@ -98,11 +99,17 @@ public class PlayerHealth : MonoBehaviour
 
     public void SetActiveCheckpoint(Checkpoint checkpoint)
     {
+        if (CurrentCheckpoint == checkpoint)
+        {
+            return;
+        }
+        
         CurrentCheckpoint?.DeactivateCheckpoint();
         CurrentCheckpoint = checkpoint;
         checkpoint.ActivateCheckpoint();
 
         ResetHealth();
+        CheckpointActivated?.Invoke();
     }
 
 

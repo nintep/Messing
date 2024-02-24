@@ -6,6 +6,35 @@ public class CollectableObject : MonoBehaviour
 {
     public CollectibleType Type;
 
+    public bool ResetOnPlayerDeath = true;
+    public bool ResetOnCheckpointActivated = true;
+
+    private SpriteRenderer rend;
+    private BoxCollider2D boxCollider;
+
+    private PlayerHealth player;
+
+    private void Awake()
+    {
+        rend = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
+
+        player = FindObjectOfType<PlayerHealth>();
+    }
+
+    private void Start()
+    {
+        if (ResetOnCheckpointActivated)
+        {
+            player.CheckpointActivated += Activate;
+        }
+
+        if (ResetOnPlayerDeath)
+        {
+            player.PlayerDied += Activate;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")
@@ -20,7 +49,7 @@ public class CollectableObject : MonoBehaviour
                 IncreasePlayerScore();
             }
 
-            Destroy(gameObject);
+            Deactivate();
         }
     }
 
@@ -32,6 +61,18 @@ public class CollectableObject : MonoBehaviour
     public void IncreasePlayerScore()
     {
         FindObjectOfType<ScoreCounter>().AddScore();
+    }
+
+    private void Activate()
+    {
+        rend.enabled = true;
+        boxCollider.enabled = true;
+    }
+
+    private void Deactivate()
+    {
+        rend.enabled = false;
+        boxCollider.enabled = false;
     }
 
 
