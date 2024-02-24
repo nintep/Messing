@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7270623186748818013}
   - component: {fileID: 7739935723234366392}
+  - component: {fileID: 1156802275532442167}
   - component: {fileID: 6421864640444585718}
   - component: {fileID: 7416440989642172515}
   - component: {fileID: 2027761078541158497}
@@ -148,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 8844745921852020334}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.28, y: 1.27, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -172,6 +173,20 @@ MonoBehaviour:
   HorizontalStateName: Idle
   VerticalStateName: Vertical
   Animator: {fileID: 3954457445177461755}
+--- !u!114 &1156802275532442167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844745921852020334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a2fa8f6a1588c48bba3945461cf661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResetPositionOnCheckpointActivated: 1
+  ResetPositionOnPlayerDeath: 1
 --- !u!212 &6421864640444585718
 SpriteRenderer:
   m_ObjectHideFlags: 0

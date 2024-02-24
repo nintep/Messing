@@ -7,15 +7,23 @@ public class Checkpoint : MonoBehaviour
 {
     private PlayerHealth health;
 
-    public Color ActiveColor;
-    public Color InactiveColor;
+    public string ActiveState;
+    public string InactiveState;
 
     public SpriteRenderer sprite;
+
+    public Animator animator;
 
     private void Awake()
     {
         health = FindAnyObjectByType<PlayerHealth>();
-        sprite.color = InactiveColor;
+
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+
+        animator.Play(InactiveState);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -28,11 +36,12 @@ public class Checkpoint : MonoBehaviour
 
     public void ActivateCheckpoint()
     {
-        sprite.color = ActiveColor;
+        Debug.Log("activated checkpoint");
+        animator.Play(ActiveState);
     }
 
     public void DeactivateCheckpoint()
     {
-        sprite.color = InactiveColor;
+        animator.Play(InactiveState);
     }
 }
