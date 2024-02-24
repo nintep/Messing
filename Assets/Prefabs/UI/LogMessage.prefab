@@ -185,5 +185,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 9062384718025777223}
-  LifeSpan: 4
+  LifeSpan: 3
   isLatestMessage: 0
+  timerRunning: 0

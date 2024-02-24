@@ -11,7 +11,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 6261370978996222042}
-    m_Position: {x: 370, y: 120, z: 0}
+    m_Position: {x: 400, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 186625688273620736}
     m_Position: {x: 405, y: 185, z: 0}
@@ -54,7 +54,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Checkpoint_active
+  m_Name: Active
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
