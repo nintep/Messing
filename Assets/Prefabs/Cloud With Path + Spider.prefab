@@ -446,6 +446,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider With Path
       objectReference: {fileID: 0}
+    - target: {fileID: 8885119322004115624, guid: 21c43140cc612d642b0151489cc155f3, type: 3}
+      propertyPath: ResetPositionOnPlayerDeath
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885119322004115624, guid: 21c43140cc612d642b0151489cc155f3, type: 3}
+      propertyPath: ResetPositionOnCheckpointActivated
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
